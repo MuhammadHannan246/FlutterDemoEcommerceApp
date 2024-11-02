@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:test/colors/colors.dart';
 
 class ProductsScreen extends StatelessWidget {
@@ -47,9 +48,11 @@ class ProductsScreen extends StatelessWidget {
               ),
               ProductCard(
                 productImage: 'assets/images/product_image.png',
-                productName: 'Product Name',
-                productRating: 4.5,
+                productName: 'Iphone 14',
+                productRating: 4.9,
                 productPrice: 29.99,
+                productBrand: 'By Apple',
+                productCategory: 'In Smartphones',
               ),
             ],
           ),
@@ -64,6 +67,8 @@ class ProductCard extends StatelessWidget {
   final String productName;
   final double productRating;
   final double productPrice;
+  final String productBrand;
+  final String productCategory;
 
   const ProductCard({
     Key? key,
@@ -71,53 +76,101 @@ class ProductCard extends StatelessWidget {
     required this.productName,
     required this.productRating,
     required this.productPrice,
+    required this.productBrand,
+    required this.productCategory,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      elevation: 3,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+        side: BorderSide(color: kGreyColor),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                bottomRight: Radius.circular(8.0),
+                bottomLeft: Radius.circular(8.0),
+              ),
               child: Image.asset(
                 productImage,
                 width: double.infinity,
-                height: 120,
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 8),
-            Text(
-              productName,
-              style: Theme.of(context).textTheme.bodyLarge,
-            ),
-            const SizedBox(height: 4),
-            Row(
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Icon(Icons.star, color: Colors.amber, size: 16),
-                const SizedBox(width: 4),
-                Text(
-                  '$productRating',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      productName,
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Text(
+                      '\$$productPrice',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Row(
+                    children: [
+                      Text(
+                        '$productRating',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                      const SizedBox(width: 4),
+                      RatingBarIndicator(
+                        rating: productRating,
+                        itemBuilder: (context, index) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        itemCount: 5,
+                        itemSize: 16.0,
+                        direction: Axis.horizontal,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    productBrand,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: kGreyColor,
+                        ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    productCategory,
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: kBlackColor,
+                        ),
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 4),
-            Text(
-              '\$$productPrice',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
