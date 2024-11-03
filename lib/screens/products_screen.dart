@@ -1,10 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:http/http.dart' as http;
+import 'package:test/Model/product_data_model.dart';
+import 'dart:convert';
 import 'package:test/colors/colors.dart';
+import 'package:test/widgets/product_card_widget.dart';
 
-class ProductsScreen extends StatelessWidget {
+class ProductsScreen extends StatefulWidget {
   static const String routeName = '/products';
   const ProductsScreen({super.key});
+
+  @override
+  _ProductsScreenState createState() => _ProductsScreenState();
+}
+
+class _ProductsScreenState extends State<ProductsScreen> {
+  late Future<ProductDataModel?> _productData;
+
+  // Fetch product data from API
+  Future<ProductDataModel?> fetchProductData() async {
+    try {
+      final response =
+          await http.get(Uri.parse('https://dummyjson.com/products?limit=100'));
+
+      if (response.statusCode == 200) {
+        return ProductDataModel.fromJson(json.decode(response.body));
+      } else {
+        throw Exception('Failed to load products');
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+      return null; // Return null if an error occurs
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _productData = fetchProductData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,141 +69,39 @@ class ProductsScreen extends StatelessWidget {
                   onTap: () {},
                 ),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Text(
-                  '234 results found',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        color: kGreyColor,
-                      ),
-                ),
-              ),
-              ProductCard(
-                productImage: 'assets/images/product_image.png',
-                productName: 'Iphone 14',
-                productRating: 4.9,
-                productPrice: 29.99,
-                productBrand: 'By Apple',
-                productCategory: 'In Smartphones',
+              const SizedBox(height: 16),
+              FutureBuilder<ProductDataModel?>(
+                future: _productData,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData ||
+                      snapshot.data?.products == null ||
+                      snapshot.data!.products!.isEmpty) {
+                    return const Center(child: Text('No products found'));
+                  } else {
+                    return Column(
+                      children: snapshot.data!.products!.map((product) {
+                        return ProductCard(
+                          productImage: product?.thumbnail ??
+                              'assets/images/default_product.png',
+                          productName: product?.title ?? 'No Name',
+                          productRating: product?.rating ?? 0.0,
+                          productPrice: product?.price ?? 0.0,
+                          productBrand: 'By ${product?.brand ?? 'Unknown'}',
+                          productCategory:
+                              'In ${product?.category ?? 'Miscellaneous'}',
+                        );
+                      }).toList(),
+                    );
+                  }
+                },
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ProductCard extends StatelessWidget {
-  final String productImage;
-  final String productName;
-  final double productRating;
-  final double productPrice;
-  final String productBrand;
-  final String productCategory;
-
-  const ProductCard({
-    Key? key,
-    required this.productImage,
-    required this.productName,
-    required this.productRating,
-    required this.productPrice,
-    required this.productBrand,
-    required this.productCategory,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 0,
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-        side: BorderSide(color: kGreyColor),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                bottomRight: Radius.circular(8.0),
-                bottomLeft: Radius.circular(8.0),
-              ),
-              child: Image.asset(
-                productImage,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      productName,
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    Text(
-                      '\$$productPrice',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Row(
-                    children: [
-                      Text(
-                        '$productRating',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                      const SizedBox(width: 4),
-                      RatingBarIndicator(
-                        rating: productRating,
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        itemCount: 5,
-                        itemSize: 16.0,
-                        direction: Axis.horizontal,
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    productBrand,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: kGreyColor,
-                        ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    productCategory,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: kBlackColor,
-                        ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
