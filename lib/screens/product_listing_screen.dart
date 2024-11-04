@@ -8,8 +8,7 @@ class ProductListingScreen extends StatelessWidget {
   static const String routeName = '/product-listing-screen';
   final String categoryName;
 
-  const ProductListingScreen({Key? key, required this.categoryName})
-      : super(key: key);
+  const ProductListingScreen({super.key, required this.categoryName});
 
   Future<ProductDataModel?> fetchProducts() async {
     final response = await http.get(
@@ -62,16 +61,15 @@ class ProductListingScreen extends StatelessWidget {
                 future: fetchProducts(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData ||
                       snapshot.data!.products == null) {
-                    return Center(child: Text('No products found'));
+                    return const Center(child: Text('No products found'));
                   }
 
                   final products = snapshot.data!.products!;
-                  // Display total number of products
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -82,19 +80,18 @@ class ProductListingScreen extends StatelessWidget {
                             ),
                       ),
                       const SizedBox(height: 16),
-                      // Displaying the list of products
                       ...products.map((product) {
                         return ProductCard(
                           productImage: product?.thumbnail ??
                               'assets/images/default_product.png',
-                          productName: product?.title ?? 'No Name',
+                          productName: product?.title ?? 'Unknown Product',
                           productRating: product?.rating ?? 0.0,
                           productPrice: product?.price ?? 0.0,
                           productBrand: 'By ${product?.brand ?? 'Unknown'}',
                           productCategory:
                               'In ${product?.category ?? 'Miscellaneous'}',
                         );
-                      }).toList(),
+                      }),
                     ],
                   );
                 },
