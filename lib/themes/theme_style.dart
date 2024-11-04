@@ -31,7 +31,8 @@ class ThemeStyle {
       },
     ),
     iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(foregroundColor: WidgetStateProperty.all(kPrimarySwatchColor)),
+      style: ButtonStyle(
+          foregroundColor: WidgetStateProperty.all(kPrimarySwatchColor)),
     ),
     menuButtonTheme: MenuButtonThemeData(
       style: ButtonStyle(
@@ -114,17 +115,23 @@ class ThemeStyle {
       unselectedItemColor: kWhiteColor,
     ),
     textTheme: TextTheme(
-      displayLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      displayMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      displaySmall: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineSmall: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      displayLarge:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      displayMedium:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      displaySmall:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      headlineLarge:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      headlineMedium:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      headlineSmall:
+          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
       titleLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
       titleMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
       titleSmall: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      bodyLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      bodyMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      bodyLarge: TextStyle(fontFamily: 'poppins', color: kBlackColor),
+      bodyMedium: TextStyle(fontFamily: 'poppins', color: kBlackColor),
       bodySmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
       labelLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
       labelMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
