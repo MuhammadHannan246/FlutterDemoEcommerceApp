@@ -67,7 +67,7 @@ class ProductCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         productName,
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodyMedium,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -75,7 +75,7 @@ class ProductCard extends StatelessWidget {
                     Flexible(
                       child: Text(
                         '\$$productPrice',
-                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                               fontWeight: FontWeight.bold,
                             ),
                         maxLines: 1,
@@ -90,7 +90,7 @@ class ProductCard extends StatelessWidget {
                     children: [
                       Text(
                         '$productRating',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.bodySmall,
                       ),
                       const SizedBox(width: 4),
                       RatingBarIndicator(
@@ -110,23 +110,20 @@ class ProductCard extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
                     productBrand,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: kGreyColor,
                         ),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: Text(
-                    productCategory,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          color: kBlackColor,
-                        ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  productCategory,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: kBlackColor,
+                      ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),
