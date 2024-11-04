@@ -11,14 +11,14 @@ class ProductCard extends StatelessWidget {
   final String productCategory;
 
   const ProductCard({
-    Key? key,
+    super.key,
     required this.productImage,
     required this.productName,
     required this.productRating,
     required this.productPrice,
     required this.productBrand,
     required this.productCategory,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class ProductCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       RatingBarIndicator(
                         rating: productRating,
-                        itemBuilder: (context, index) => Icon(
+                        itemBuilder: (context, index) => const Icon(
                           Icons.star,
                           color: Colors.amber,
                         ),
