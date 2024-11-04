@@ -71,15 +71,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   onTap: () {},
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Text(
-                  '234 results found',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        color: kGreyColor,
-                      ),
-                ),
-              ),
               const SizedBox(height: 16),
               FutureBuilder<ProductDataModel?>(
                 future: _productData,
@@ -93,19 +84,31 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       snapshot.data!.products!.isEmpty) {
                     return const Center(child: Text('No products found'));
                   } else {
+                    final products = snapshot.data!.products!;
                     return Column(
-                      children: snapshot.data!.products!.map((product) {
-                        return ProductCard(
-                          productImage: product?.thumbnail ??
-                              'assets/images/default_product.png',
-                          productName: product?.title ?? 'No Name',
-                          productRating: product?.rating ?? 0.0,
-                          productPrice: product?.price ?? 0.0,
-                          productBrand: 'By ${product?.brand ?? 'Unknown'}',
-                          productCategory:
-                              'In ${product?.category ?? 'Miscellaneous'}',
-                        );
-                      }).toList(),
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${products.length} results found',
+                          style:
+                              Theme.of(context).textTheme.bodySmall!.copyWith(
+                                    color: kGreyColor,
+                                  ),
+                        ),
+                        const SizedBox(height: 16),
+                        ...products.map((product) {
+                          return ProductCard(
+                            productImage: product?.thumbnail ??
+                                'assets/images/default_product.png',
+                            productName: product?.title ?? 'Unknown Product',
+                            productRating: product?.rating ?? 0.0,
+                            productPrice: product?.price ?? 0.0,
+                            productBrand: 'By ${product?.brand ?? 'Unknown'}',
+                            productCategory:
+                                'In ${product?.category ?? 'Miscellaneous'}',
+                          );
+                        }),
+                      ],
                     );
                   }
                 },
