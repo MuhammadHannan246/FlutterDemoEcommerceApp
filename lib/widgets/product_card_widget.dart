@@ -68,13 +68,19 @@ class ProductCard extends StatelessWidget {
                       child: Text(
                         productName,
                         style: Theme.of(context).textTheme.bodyLarge,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text(
-                      '\$$productPrice',
-                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                    Flexible(
+                      child: Text(
+                        '\$$productPrice',
+                        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 ),
@@ -107,6 +113,8 @@ class ProductCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: kGreyColor,
                         ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
                 Padding(
@@ -116,6 +124,8 @@ class ProductCard extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                           color: kBlackColor,
                         ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
               ],
