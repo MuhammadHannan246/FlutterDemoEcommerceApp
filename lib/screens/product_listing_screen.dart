@@ -78,6 +78,8 @@ class ProductListingScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.bodySmall!.copyWith(
                               color: kGreyColor,
                             ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(height: 16),
                       ...products.map((product) {
