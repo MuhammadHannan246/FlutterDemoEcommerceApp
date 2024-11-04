@@ -26,7 +26,7 @@ class CategoryCardWidget extends StatelessWidget {
                     imageUrl,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
-                      return Center(child: Text('Image not available'));
+                      return const Center(child: Text('Image not available'));
                     },
                   )
                 : Image.asset(
