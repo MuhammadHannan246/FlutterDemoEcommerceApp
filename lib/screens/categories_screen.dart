@@ -91,6 +91,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                               Theme.of(context).textTheme.bodySmall!.copyWith(
                                     color: kGreyColor,
                                   ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 16),
                         GridView.builder(
