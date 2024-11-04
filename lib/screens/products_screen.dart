@@ -29,7 +29,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
       }
     } catch (e) {
       print('Error fetching data: $e');
-      return null; // Return null if an error occurs
+      return null;
     }
   }
 
@@ -56,17 +56,28 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 child: ListTile(
                   leading: const Icon(Icons.search_sharp),
                   title: TextField(
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.zero,
                       hintText: 'Search here',
+                      hintStyle: Theme.of(context).textTheme.bodySmall,
                       border: InputBorder.none,
                     ),
+                    style: Theme.of(context).textTheme.bodySmall,
                     onChanged: (value) {
                       print("Search query: $value");
                     },
                   ),
                   onTap: () {},
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: Text(
+                  '234 results found',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: kGreyColor,
+                      ),
                 ),
               ),
               const SizedBox(height: 16),
