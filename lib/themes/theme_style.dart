@@ -115,27 +115,21 @@ class ThemeStyle {
       unselectedItemColor: kWhiteColor,
     ),
     textTheme: TextTheme(
-      displayLarge:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      displayMedium:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      displaySmall:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineLarge:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineMedium:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      headlineSmall:
-          TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      displayLarge: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      displayMedium: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      displaySmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      headlineLarge: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      headlineMedium: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      headlineSmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
       titleLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      titleMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      titleSmall: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      bodyLarge: TextStyle(fontFamily: 'poppins', color: kBlackColor),
-      bodyMedium: TextStyle(fontFamily: 'poppins', color: kBlackColor),
+      titleMedium: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      titleSmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      bodyLarge: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      bodyMedium: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
       bodySmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
-      labelLarge: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      labelMedium: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
-      labelSmall: TextStyle(fontFamily: 'PlayfairDisplay', color: kBlackColor),
+      labelLarge: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      labelMedium: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
+      labelSmall: TextStyle(fontFamily: 'Poppins', color: kBlackColor),
     ),
   );
 }
