@@ -1,25 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:test/Model/product_data_model.dart';
 import 'package:test/colors/colors.dart';
+import 'package:test/screens/product_detail_screen.dart';
+import 'package:test/service/product_listing_service.dart';
+import 'package:test/Model/product_data_model.dart';
 import 'package:test/widgets/product_card_widget.dart';
+
 
 class ProductListingScreen extends StatelessWidget {
   static const String routeName = '/product-listing-screen';
   final String categoryName;
+  final ProductListingService _productListingService = ProductListingService();
 
-  const ProductListingScreen({super.key, required this.categoryName});
-
-  Future<ProductDataModel?> fetchProducts() async {
-    final response = await http.get(
-        Uri.parse('https://dummyjson.com/products/category/$categoryName'));
-
-    if (response.statusCode == 200) {
-      return productDataModelFromJson(response.body);
-    } else {
-      throw Exception('Failed to load products');
-    }
-  }
+  ProductListingScreen({super.key, required this.categoryName});
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +25,7 @@ class ProductListingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Search bar
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -58,14 +51,13 @@ class ProductListingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               FutureBuilder<ProductDataModel?>(
-                future: fetchProducts(),
+                future: _productListingService.fetchProductsByCategory(categoryName),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData ||
-                      snapshot.data!.products == null) {
+                  } else if (!snapshot.hasData || snapshot.data!.products == null) {
                     return const Center(child: Text('No products found'));
                   }
 
@@ -83,15 +75,21 @@ class ProductListingScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       ...products.map((product) {
-                        return ProductCard(
-                          productImage: product?.thumbnail ??
-                              'assets/images/default_product.png',
+                        return ProductCardWidget(
+                          productImage: product?.thumbnail ?? 'assets/images/default_product.png',
                           productName: product?.title ?? 'Unknown Product',
                           productRating: product?.rating ?? 0.0,
                           productPrice: product?.price ?? 0.0,
                           productBrand: 'By ${product?.brand ?? 'Unknown'}',
-                          productCategory:
-                              'In ${product?.category ?? 'Miscellaneous'}',
+                          productCategory: 'In ${product?.category ?? 'Miscellaneous'}',
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetailScreen(product: product!), 
+                              ),
+                            );
+                          },
                         );
                       }),
                     ],
