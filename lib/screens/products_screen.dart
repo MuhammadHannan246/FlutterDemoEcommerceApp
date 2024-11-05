@@ -1,42 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:test/Model/product_data_model.dart';
-import 'dart:convert';
 import 'package:test/colors/colors.dart';
+import 'package:test/screens/product_detail_screen.dart';
+import 'package:test/service/product_service.dart';
 import 'package:test/widgets/product_card_widget.dart';
 
 class ProductsScreen extends StatefulWidget {
-  static const String routeName = '/products';
+  static const String routeName = '/products-screen';
   const ProductsScreen({super.key});
 
   @override
-  _ProductsScreenState createState() => _ProductsScreenState();
+  State<ProductsScreen> createState() => _ProductsScreenState();
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
+  final ProductService _productService =
+      ProductService(); 
   late Future<ProductDataModel?> _productData;
-
-  // Fetch product data from API
-  Future<ProductDataModel?> fetchProductData() async {
-    try {
-      final response =
-          await http.get(Uri.parse('https://dummyjson.com/products?limit=100'));
-
-      if (response.statusCode == 200) {
-        return ProductDataModel.fromJson(json.decode(response.body));
-      } else {
-        throw Exception('Failed to load products');
-      }
-    } catch (e) {
-      print('Error fetching data: $e');
-      return null;
-    }
-  }
 
   @override
   void initState() {
     super.initState();
-    _productData = fetchProductData();
+    _productData =
+        _productService.fetchProductData(); // Use the service to fetch data
   }
 
   @override
@@ -99,7 +85,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         ),
                         const SizedBox(height: 16),
                         ...products.map((product) {
-                          return ProductCard(
+                          return ProductCardWidget(
                             productImage: product?.thumbnail ??
                                 'assets/images/default_product.png',
                             productName: product?.title ?? 'Unknown Product',
@@ -108,6 +94,14 @@ class _ProductsScreenState extends State<ProductsScreen> {
                             productBrand: 'By ${product?.brand ?? 'Unknown'}',
                             productCategory:
                                 'In ${product?.category ?? 'Miscellaneous'}',
+                                onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductDetailScreen(product: product!), 
+                              ),
+                            );
+                          },
                           );
                         }),
                       ],
