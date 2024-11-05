@@ -1,41 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:test/Model/categories_data_model.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/screens/product_listing_screen.dart';
+import 'package:test/service/categories_service.dart';
 import 'package:test/widgets/category_card_widget.dart';
-import 'package:test/Model/categories_data_model.dart';
-import 'package:http/http.dart' as http;
 
 class CategoriesScreen extends StatefulWidget {
   static const String routeName = '/categories';
   const CategoriesScreen({super.key});
 
   @override
-  _CategoriesScreenState createState() => _CategoriesScreenState();
+  State<CategoriesScreen> createState() => _CategoriesScreenState();
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   late Future<List<CategoriesDataModel>> _categories;
-
-  Future<List<CategoriesDataModel>> fetchCategories() async {
-    try {
-      final response = await http
-          .get(Uri.parse('https://dummyjson.com/products/categories'));
-
-      if (response.statusCode == 200) {
-        return categoriesDataModelFromJson(response.body);
-      } else {
-        throw Exception('Failed to load categories');
-      }
-    } catch (e) {
-      print('Error fetching categories: $e');
-      return [];
-    }
-  }
+  final CategoryService _categoryService = CategoryService();
 
   @override
   void initState() {
     super.initState();
-    _categories = fetchCategories();
+    _categories = _categoryService.fetchCategories();
   }
 
   @override
@@ -47,29 +32,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(color: kBlackColor, width: 1.5),
-                ),
-                child: ListTile(
-                  leading: const Icon(Icons.search_sharp),
-                  title: TextField(
-                    decoration: InputDecoration(
-                      isDense: true,
-                      contentPadding: EdgeInsets.zero,
-                      hintText: 'Search here',
-                      hintStyle: Theme.of(context).textTheme.bodySmall,
-                      border: InputBorder.none,
-                    ),
-                    style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {
-                      print("Search query: $value");
-                    },
-                  ),
-                  onTap: () {},
-                ),
-              ),
+              // Search bar widget here...
               const SizedBox(height: 16),
               FutureBuilder<List<CategoriesDataModel>>(
                 future: _categories,
