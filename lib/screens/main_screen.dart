@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/screens/categories_screen.dart';
-import 'package:test/screens/favourites_screen.dart';
+import 'package:test/screens/favourite_products_screen.dart';
 import 'package:test/screens/products_screen.dart';
 import 'package:test/screens/profile_screen.dart';
 
@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> pages = [
     const ProductsScreen(),
     const CategoriesScreen(),
-    const FavouritesScreen(),
+    const FavouriteProductsScreen(),
     const ProfileScreen(),
   ];
 
@@ -42,50 +42,35 @@ class _MainScreenState extends State<MainScreen> {
   Widget _buildAppBarTitle() {
     switch (selectedPageIndex) {
       case 0:
-        return Center(
-          child: Text(
-            'Products',
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        return const Text(
+          'Products',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         );
 
       case 1:
-        return Center(
-          child: Text(
-            'Categories',
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        return const Text(
+          'Categories',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         );
       case 2:
-        return Center(
-          child: Text(
-            'Favoruites',
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        return const Text(
+          'Favoruites',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         );
       case 3:
-        return Center(
-          child: Text(
-            'Mit Konto',
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        return const Text(
+          'Mit Konto',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         );
       default:
-        return Center(
-          child: Text(
-            'My Store',
-            style: Theme.of(context).textTheme.headlineSmall,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
+        return const Text(
+          'My Store',
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         );
     }
   }
@@ -94,7 +79,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _buildAppBarTitle(),
+        title: Center(
+          child: _buildAppBarTitle(),
+        ),
       ),
       body: pages[selectedPageIndex],
       bottomNavigationBar: ClipRRect(
