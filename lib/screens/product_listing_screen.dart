@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
-import 'package:test/model/categories_data_model.dart';
+import 'package:test/model/category_data_model.dart';
 import 'package:test/screens/product_detail_screen.dart';
 import 'package:test/model/product_data_model.dart';
 import 'package:test/service/product_service.dart';

@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:test/model/categories_data_model.dart';
+import 'package:test/model/category_data_model.dart';
 
 class CategoryService {
   final String _baseUrl = 'https://dummyjson.com/products/categories';

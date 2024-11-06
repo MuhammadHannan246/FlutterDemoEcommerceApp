@@ -33,7 +33,6 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -58,7 +57,6 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-
               FutureBuilder<ProductDataModel?>(
                 future: _productData,
                 builder: (context, snapshot) {

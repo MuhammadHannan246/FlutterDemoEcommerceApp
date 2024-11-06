@@ -21,7 +21,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     super.initState();
-    // Check if the product is already in the wishlist
     isWishlisted = wishlist.contains(widget.product);
   }
 

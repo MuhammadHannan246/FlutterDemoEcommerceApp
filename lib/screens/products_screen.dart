@@ -20,7 +20,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   void initState() {
     super.initState();
-    _productData = _productService.fetchProductData(); // Use the service to fetch data
+    _productData = _productService.fetchProductData();
   }
 
   @override

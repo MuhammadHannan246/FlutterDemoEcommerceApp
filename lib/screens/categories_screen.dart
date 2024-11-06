@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/model/categories_data_model.dart';
+import 'package:test/model/category_data_model.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/service/categories_service.dart';
 import 'package:test/widgets/category_card_widget.dart';
