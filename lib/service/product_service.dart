@@ -13,7 +13,6 @@ class ProductService {
         throw Exception('Failed to load products');
       }
     } catch (e) {
-      print('Error fetching data: $e');
       return null;
     }
   }

@@ -48,9 +48,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {
-                      print("Search query: $value");
-                    },
+                    onChanged: (value) {},
                   ),
                   onTap: () {},
                 ),

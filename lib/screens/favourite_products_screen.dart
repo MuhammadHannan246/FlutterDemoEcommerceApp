@@ -49,9 +49,7 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {
-                      print("Search query: $value");
-                    },
+                    onChanged: (value) {},
                   ),
                   onTap: () {},
                 ),

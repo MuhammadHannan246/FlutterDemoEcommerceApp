@@ -14,7 +14,6 @@ class CategoryService {
         throw Exception('Failed to load categories');
       }
     } catch (e) {
-      print('Error fetching categories: $e');
       return [];
     }
   }
