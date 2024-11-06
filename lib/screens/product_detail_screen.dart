@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:test/Model/product_data_model.dart';
+import 'package:test/model/product_data_model.dart';
 import 'package:test/constants/constants.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -39,6 +39,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         title: const Text('Product Details'),
       ),
       body: SingleChildScrollView(
