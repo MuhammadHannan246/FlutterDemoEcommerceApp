@@ -4,7 +4,7 @@ import 'package:test/model/categories_data_model.dart';
 class CategoryService {
   final String _baseUrl = 'https://dummyjson.com/products/categories';
 
-  Future<List<CategoriesDataModel>> fetchCategories() async {
+  Future<List<CategoryDataModel>> fetchCategories() async {
     try {
       final response = await http.get(Uri.parse(_baseUrl));
 

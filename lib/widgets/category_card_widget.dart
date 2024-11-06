@@ -3,7 +3,7 @@ import 'package:test/model/categories_data_model.dart';
 import 'package:test/screens/product_listing_screen.dart';
 
 class CategoryCardWidget extends StatelessWidget {
-  final CategoriesDataModel category;
+  final CategoryDataModel category;
 
   const CategoryCardWidget({
     super.key,
@@ -14,13 +14,10 @@ class CategoryCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => ProductListingScreen(
-              categoryName: category.name ?? 'Unknown Category',
-            ),
-          ),
+          ProductListingScreen.routeName,
+          arguments: category,
         );
       },
       child: Container(

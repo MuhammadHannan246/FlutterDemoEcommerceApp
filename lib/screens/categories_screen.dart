@@ -13,7 +13,7 @@ class CategoriesScreen extends StatefulWidget {
 }
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  late Future<List<CategoriesDataModel>> _categories;
+  late Future<List<CategoryDataModel>> _categories;
   final CategoryService _categoryService = CategoryService();
 
   @override
@@ -55,7 +55,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              FutureBuilder<List<CategoriesDataModel>>(
+              FutureBuilder<List<CategoryDataModel>>(
                 future: _categories,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
+import 'package:test/model/categories_data_model.dart';
 import 'package:test/screens/product_detail_screen.dart';
 import 'package:test/service/product_listing_service.dart';
 import 'package:test/model/product_data_model.dart';
@@ -7,17 +8,18 @@ import 'package:test/widgets/product_card_widget.dart';
 
 class ProductListingScreen extends StatelessWidget {
   static const String routeName = '/product-listing-screen';
-  final String categoryName;
   final ProductListingService _productListingService = ProductListingService();
 
-  ProductListingScreen({super.key, required this.categoryName});
+  ProductListingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CategoryDataModel category = ModalRoute.of(context)!.settings.arguments as CategoryDataModel;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
-        title: Text(categoryName),
+        title: Text(category.name ?? 'Unknown Category'),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -25,7 +27,6 @@ class ProductListingScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
@@ -51,7 +52,7 @@ class ProductListingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               FutureBuilder<ProductDataModel?>(
-                future: _productListingService.fetchProductsByCategory(categoryName),
+                future: _productListingService.fetchProductsByCategory(category.name ?? 'Unknown Category'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator.adaptive());

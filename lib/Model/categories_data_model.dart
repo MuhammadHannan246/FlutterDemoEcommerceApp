@@ -1,34 +1,32 @@
 import 'dart:convert';
 
-List<CategoriesDataModel> categoriesDataModelFromJson(String str) =>
-    List<CategoriesDataModel>.from(json.decode(str).map((x) => CategoriesDataModel.fromJson(x)));
+List<CategoryDataModel> categoriesDataModelFromJson(String str) => List<CategoryDataModel>.from(json.decode(str).map((x) => CategoryDataModel.fromJson(x)));
 
-String categoriesDataModelToJson(List<CategoriesDataModel> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String categoryDataModelToJson(List<CategoryDataModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class CategoriesDataModel {
+class CategoryDataModel {
   final String? slug;
   final String? name;
   final String? url;
 
-  CategoriesDataModel({
+  CategoryDataModel({
     this.slug,
     this.name,
     this.url,
   });
 
-  CategoriesDataModel copyWith({
+  CategoryDataModel copyWith({
     String? slug,
     String? name,
     String? url,
   }) =>
-      CategoriesDataModel(
+      CategoryDataModel(
         slug: slug ?? this.slug,
         name: name ?? this.name,
         url: url ?? this.url,
       );
 
-  factory CategoriesDataModel.fromJson(Map<String, dynamic> json) => CategoriesDataModel(
+  factory CategoryDataModel.fromJson(Map<String, dynamic> json) => CategoryDataModel(
         slug: json["slug"] as String?,
         name: json["name"] as String?,
         url: json["url"] as String?,

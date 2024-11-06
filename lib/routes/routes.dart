@@ -16,9 +16,7 @@ class PageRoutes {
       FavouritesScreen.routeName: (context) => const FavouritesScreen(),
       FavouriteProductsScreen.routeName: (context) => const FavouriteProductsScreen(),
       ProfileScreen.routeName: (context) => const ProfileScreen(),
-      ProductListingScreen.routeName: (context) => ProductListingScreen(
-            categoryName: '',
-          ),
+      ProductListingScreen.routeName: (context) => ProductListingScreen(),
     };
   }
 }
