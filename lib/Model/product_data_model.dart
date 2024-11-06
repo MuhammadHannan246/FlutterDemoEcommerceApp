@@ -314,15 +314,15 @@ class Meta {
 }
 
 enum ReturnPolicy {
-  NO_RETURN_POLICY,
-  THE_30_DAYS_RETURN_POLICY,
-  THE_90_DAYS_RETURN_POLICY
+  noReturnPolicy,
+  the30DaysReturnPolicy,
+  the90DaysReturnPolicy
 }
 
 final returnPolicyValues = EnumValues({
-  "30-Days Return Policy": ReturnPolicy.THE_30_DAYS_RETURN_POLICY,
-  "90-Days Return Policy": ReturnPolicy.THE_90_DAYS_RETURN_POLICY,
-  "No Return Policy": ReturnPolicy.NO_RETURN_POLICY
+  "30-Days Return Policy": ReturnPolicy.the30DaysReturnPolicy,
+  "90-Days Return Policy": ReturnPolicy.the90DaysReturnPolicy,
+  "No Return Policy": ReturnPolicy.noReturnPolicy
 });
 
 class Review {
@@ -360,12 +360,12 @@ class Review {
       };
 }
 
-enum ShippingInformation { EXPRESS, FREE_SHIPPING, STANDARD }
+enum ShippingInformation { express, freeShipping, standard }
 
 final shippingInformationValues = EnumValues({
-  "Express": ShippingInformation.EXPRESS,
-  "Free Shipping": ShippingInformation.FREE_SHIPPING,
-  "Standard": ShippingInformation.STANDARD
+  "express": ShippingInformation.express,
+  "Free Shipping": ShippingInformation.freeShipping,
+  "standard": ShippingInformation.standard
 });
 
 class EnumValues<T> {
