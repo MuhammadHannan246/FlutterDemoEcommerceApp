@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/Model/product_data_model.dart';
+import 'package:test/model/product_data_model.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/service/product_service.dart';
 import 'package:test/widgets/favourite_products_widget.dart';
@@ -7,7 +7,7 @@ import 'package:test/widgets/favourite_products_widget.dart';
 class FavouriteProductsScreen extends StatefulWidget {
   static const String routeName = '/favourite_products_screen';
 
-  const FavouriteProductsScreen({Key? key}) : super(key: key);
+  const FavouriteProductsScreen({super.key});
 
   @override
   State<FavouriteProductsScreen> createState() =>
