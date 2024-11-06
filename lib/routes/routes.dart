@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/screens/categories_screen.dart';
 import 'package:test/screens/favourite_products_screen.dart';
 import 'package:test/screens/favourites_screen.dart';
+import 'package:test/screens/product_detail_screen.dart';
 import 'package:test/screens/product_listing_screen.dart';
 import 'package:test/screens/products_screen.dart';
 import 'package:test/screens/main_screen.dart';
@@ -17,6 +18,7 @@ class PageRoutes {
       FavouriteProductsScreen.routeName: (context) => const FavouriteProductsScreen(),
       ProfileScreen.routeName: (context) => const ProfileScreen(),
       ProductListingScreen.routeName: (context) => ProductListingScreen(),
+      ProductDetailScreen.routeName: (context) => const ProductDetailScreen(),
     };
   }
 }

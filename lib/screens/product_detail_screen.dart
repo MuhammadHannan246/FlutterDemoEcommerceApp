@@ -7,9 +7,8 @@ import 'package:test/constants/constants.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const String routeName = '/product-detail-screen';
-  final Product product;
 
-  const ProductDetailScreen({super.key, required this.product});
+  const ProductDetailScreen({super.key});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
@@ -17,19 +16,29 @@ class ProductDetailScreen extends StatefulWidget {
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   bool isWishlisted = false;
+  late Product product;
+  bool _isInitialized = false;
 
   @override
-  void initState() {
-    super.initState();
-    isWishlisted = wishlist.contains(widget.product);
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (!_isInitialized) {
+      final args = ModalRoute.of(context)?.settings.arguments;
+      if (args is Product) {
+        product = args;
+        isWishlisted = wishlist.contains(product);
+      }
+      _isInitialized = true;
+    }
   }
 
   void toggleWishlist() {
     setState(() {
       if (isWishlisted) {
-        wishlist.remove(widget.product);
+        wishlist.remove(product);
       } else {
-        wishlist.add(widget.product);
+        wishlist.add(product);
       }
       isWishlisted = !isWishlisted;
     });
@@ -51,7 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
                 child: Image.network(
-                  widget.product.thumbnail!,
+                  product.thumbnail!,
                   width: double.infinity,
                 ),
               ),
@@ -86,7 +95,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '${widget.product.title}',
+                      '${product.title}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -104,7 +113,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '\$${widget.product.price}',
+                      '\$${product.price}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -122,7 +131,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '${widget.product.category}',
+                      '${product.category}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -140,7 +149,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '${widget.product.brand}',
+                      '${product.brand}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -158,12 +167,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '${widget.product.rating}',
+                      '${product.rating}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(width: 4),
                     RatingBarIndicator(
-                      rating: widget.product.rating!,
+                      rating: product.rating!,
                       itemBuilder: (context, index) => Icon(
                         Icons.star,
                         color: kAmberColor,
@@ -187,7 +196,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                     ),
                     Text(
-                      '${widget.product.stock}',
+                      '${product.stock}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -205,7 +214,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                  '${widget.product.description}',
+                  '${product.description}',
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
@@ -218,19 +227,19 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                 ),
               ),
-              if (widget.product.images != null && widget.product.images!.isNotEmpty)
+              if (product.images != null && product.images!.isNotEmpty)
                 SizedBox(
                   height: 100,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: widget.product.images!.length,
+                    itemCount: product.images!.length,
                     itemBuilder: (context, index) {
                       return Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: CachedNetworkImage(
-                            imageUrl: widget.product.images![index],
+                            imageUrl: product.images![index],
                             height: 100,
                             width: 100,
                             fit: BoxFit.cover,
@@ -244,7 +253,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     },
                   ),
                 ),
-              if (widget.product.images == null || widget.product.images!.isEmpty)
+              if (product.images == null || product.images!.isEmpty)
                 Text(
                   'No images available',
                   style: Theme.of(context).textTheme.bodyMedium,

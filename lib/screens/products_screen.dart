@@ -81,11 +81,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           return ProductCardWidget(
                             product: product!,
                             onTap: () {
-                              Navigator.push(
+                              Navigator.pushNamed(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => ProductDetailScreen(product: product),
-                                ),
+                                ProductDetailScreen.routeName,
+                                arguments: product,
                               );
                             },
                           );
