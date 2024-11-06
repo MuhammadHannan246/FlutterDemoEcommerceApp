@@ -10,14 +10,14 @@ class FavouriteProductsWidget extends StatelessWidget {
   final VoidCallback onFavoriteToggle;
 
   const FavouriteProductsWidget({
-    Key? key,
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.price,
     required this.rating,
     required this.isFavorite,
     required this.onFavoriteToggle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class FavouriteProductsWidget extends StatelessWidget {
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => Icon(Icons.error),
+                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
               ),
             ),
           ),
