@@ -81,17 +81,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         const SizedBox(height: 16),
                         ...products.map((product) {
                           return ProductCardWidget(
-                            productImage: product?.thumbnail ?? 'assets/images/default_product.png',
-                            productName: product?.title ?? 'Unknown Product',
-                            productRating: product?.rating ?? 0.0,
-                            productPrice: product?.price ?? 0.0,
-                            productBrand: 'By ${product?.brand ?? 'Unknown'}',
-                            productCategory: 'In ${product?.category ?? 'Miscellaneous'}',
+                            product: product!,
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => ProductDetailScreen(product: product!),
+                                  builder: (context) => ProductDetailScreen(product: product),
                                 ),
                               );
                             },

@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:test/colors/colors.dart';
+import 'package:test/model/product_data_model.dart';
 
 class ProductCardWidget extends StatelessWidget {
-  final String productImage;
-  final String productName;
-  final double productRating;
-  final double productPrice;
-  final String productBrand;
-  final String productCategory;
+  final Product product;
   final VoidCallback onTap;
 
   const ProductCardWidget({
     super.key,
-    required this.productImage,
-    required this.productName,
-    required this.productRating,
-    required this.productPrice,
-    required this.productBrand,
-    required this.productCategory,
+    required this.product,
     required this.onTap,
   });
 
@@ -46,15 +37,20 @@ class ProductCardWidget extends StatelessWidget {
                   bottomRight: Radius.circular(8.0),
                   bottomLeft: Radius.circular(8.0),
                 ),
-                child: productImage.startsWith('http')
+                child: product.thumbnail != null
                     ? Image.network(
-                        productImage,
-                        width: double.infinity,
+                        product.thumbnail!,
                         fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Image.asset(
+                            'assets/images/default_product.png',
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          );
+                        },
                       )
                     : Image.asset(
-                        productImage,
-                        width: double.infinity,
+                        'assets/images/default_product.png',
                         fit: BoxFit.cover,
                       ),
               ),
@@ -69,7 +65,7 @@ class ProductCardWidget extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          productName,
+                          product.title ?? 'Unknown Title',
                           style: Theme.of(context).textTheme.bodyMedium,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -77,7 +73,7 @@ class ProductCardWidget extends StatelessWidget {
                       ),
                       Flexible(
                         child: Text(
-                          '\$$productPrice',
+                          '\$${product.price ?? 0.0}',
                           style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -92,12 +88,12 @@ class ProductCardWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          '$productRating',
+                          '${product.rating ?? 0.0}',
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         const SizedBox(width: 4),
                         RatingBarIndicator(
-                          rating: productRating,
+                          rating: product.rating ?? 0.0,
                           itemBuilder: (context, index) => Icon(
                             Icons.star,
                             color: kAmberColor,
@@ -112,7 +108,7 @@ class ProductCardWidget extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Text(
-                      productBrand,
+                      product.brand ?? 'Unknown Brand',
                       style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: kGreyColor,
                           ),
@@ -121,7 +117,7 @@ class ProductCardWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    productCategory,
+                    product.category ?? 'Unknown Category',
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: kBlackColor,
                         ),
