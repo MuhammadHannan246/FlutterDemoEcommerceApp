@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:test/Model/categories_data_model.dart';
+import 'package:test/model/categories_data_model.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/screens/product_listing_screen.dart';
 import 'package:test/service/categories_service.dart';
@@ -32,7 +32,29 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Search bar widget here...
+               Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8.0),
+                  border: Border.all(color: kBlackColor, width: 1.5),
+                ),
+                child: ListTile(
+                  leading: const Icon(Icons.search_sharp),
+                  title: TextField(
+                    decoration: InputDecoration(
+                      isDense: true,
+                      contentPadding: EdgeInsets.zero,
+                      hintText: 'Search here',
+                      hintStyle: Theme.of(context).textTheme.bodySmall,
+                      border: InputBorder.none,
+                    ),
+                    style: Theme.of(context).textTheme.bodySmall,
+                    onChanged: (value) {
+                      print("Search query: $value");
+                    },
+                  ),
+                  onTap: () {},
+                ),
+              ),
               const SizedBox(height: 16),
               FutureBuilder<List<CategoriesDataModel>>(
                 future: _categories,
