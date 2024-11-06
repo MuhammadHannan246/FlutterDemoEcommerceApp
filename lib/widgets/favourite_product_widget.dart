@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
 
-class FavouriteProductsWidget extends StatelessWidget {
+class FavouriteProductWidget extends StatelessWidget {
   final String imageUrl;
   final String title;
   final double price;
@@ -9,7 +9,7 @@ class FavouriteProductsWidget extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback onFavoriteToggle;
 
-  const FavouriteProductsWidget({
+  const FavouriteProductWidget({
     super.key,
     required this.imageUrl,
     required this.title,

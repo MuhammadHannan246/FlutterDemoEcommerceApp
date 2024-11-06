@@ -34,27 +34,18 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   title: Text(
                     'My Name',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge!
-                        .copyWith(color: kWhiteColor),
+                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: kWhiteColor),
                   ),
                   subtitle: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'myname@gmail.com',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: kWhiteColor),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhiteColor),
                       ),
                       Text(
                         '07XXXXXXXX',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .copyWith(color: kWhiteColor),
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(color: kWhiteColor),
                       ),
                     ],
                   ),
@@ -74,10 +65,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     title: Text(
                       'Kontoinstallningar',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: kBlackColor),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kBlackColor),
                     ),
                   ),
                   ListTile(
@@ -88,10 +76,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     title: Text(
                       'Mina betalmetoder',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: kBlackColor),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kBlackColor),
                     ),
                   ),
                   ListTile(
@@ -102,10 +87,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     title: Text(
                       'Support',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyMedium!
-                          .copyWith(color: kBlackColor),
+                      style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: kBlackColor),
                     ),
                   )
                 ],

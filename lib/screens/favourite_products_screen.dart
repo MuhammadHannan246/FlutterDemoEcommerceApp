@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/model/product_data_model.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/service/product_service.dart';
-import 'package:test/widgets/favourite_products_widget.dart';
+import 'package:test/widgets/favourite_product_widget.dart';
 
 class FavouriteProductsScreen extends StatefulWidget {
   static const String routeName = '/favourite_products_screen';
@@ -10,8 +10,7 @@ class FavouriteProductsScreen extends StatefulWidget {
   const FavouriteProductsScreen({super.key});
 
   @override
-  State<FavouriteProductsScreen> createState() =>
-      _FavouriteProductsScreenState();
+  State<FavouriteProductsScreen> createState() => _FavouriteProductsScreenState();
 }
 
 class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
@@ -64,12 +63,10 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                 future: _productData,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator.adaptive());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData ||
-                      snapshot.data?.products == null ||
-                      snapshot.data!.products!.isEmpty) {
+                  } else if (!snapshot.hasData || snapshot.data?.products == null || snapshot.data!.products!.isEmpty) {
                     return const Center(child: Text('No products found'));
                   } else {
                     final products = snapshot.data!.products!;
@@ -78,18 +75,16 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                       children: [
                         Text(
                           '${products.length} results found',
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: kGreyColor,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: kGreyColor,
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 16),
                         ...products.map((product) {
-                          return FavouriteProductsWidget(
-                            imageUrl: product?.thumbnail ??
-                                'assets/images/default_product.png',
+                          return FavouriteProductWidget(
+                            imageUrl: product?.thumbnail ?? 'assets/images/default_product.png',
                             title: product?.title ?? 'Unknown Product',
                             price: product?.price ?? 0.0,
                             rating: product?.rating ?? 0.0,

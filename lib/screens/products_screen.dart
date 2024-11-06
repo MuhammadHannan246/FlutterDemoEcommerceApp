@@ -14,15 +14,13 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  final ProductService _productService =
-      ProductService(); 
+  final ProductService _productService = ProductService();
   late Future<ProductDataModel?> _productData;
 
   @override
   void initState() {
     super.initState();
-    _productData =
-        _productService.fetchProductData(); // Use the service to fetch data
+    _productData = _productService.fetchProductData(); // Use the service to fetch data
   }
 
   @override
@@ -62,12 +60,10 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 future: _productData,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator.adaptive());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData ||
-                      snapshot.data?.products == null ||
-                      snapshot.data!.products!.isEmpty) {
+                  } else if (!snapshot.hasData || snapshot.data?.products == null || snapshot.data!.products!.isEmpty) {
                     return const Center(child: Text('No products found'));
                   } else {
                     final products = snapshot.data!.products!;
@@ -76,32 +72,29 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       children: [
                         Text(
                           '${products.length} results found',
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: kGreyColor,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: kGreyColor,
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 16),
                         ...products.map((product) {
                           return ProductCardWidget(
-                            productImage: product?.thumbnail ??
-                                'assets/images/default_product.png',
+                            productImage: product?.thumbnail ?? 'assets/images/default_product.png',
                             productName: product?.title ?? 'Unknown Product',
                             productRating: product?.rating ?? 0.0,
                             productPrice: product?.price ?? 0.0,
                             productBrand: 'By ${product?.brand ?? 'Unknown'}',
-                            productCategory:
-                                'In ${product?.category ?? 'Miscellaneous'}',
-                                onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ProductDetailScreen(product: product!), 
-                              ),
-                            );
-                          },
+                            productCategory: 'In ${product?.category ?? 'Miscellaneous'}',
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ProductDetailScreen(product: product!),
+                                ),
+                              );
+                            },
                           );
                         }),
                       ],

@@ -5,7 +5,6 @@ import 'package:test/service/product_listing_service.dart';
 import 'package:test/model/product_data_model.dart';
 import 'package:test/widgets/product_card_widget.dart';
 
-
 class ProductListingScreen extends StatelessWidget {
   static const String routeName = '/product-listing-screen';
   final String categoryName;
@@ -18,7 +17,6 @@ class ProductListingScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
-
         title: Text(categoryName),
       ),
       body: SingleChildScrollView(
@@ -56,7 +54,7 @@ class ProductListingScreen extends StatelessWidget {
                 future: _productListingService.fetchProductsByCategory(categoryName),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator.adaptive());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.products == null) {
@@ -88,7 +86,7 @@ class ProductListingScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ProductDetailScreen(product: product!), 
+                                builder: (context) => ProductDetailScreen(product: product!),
                               ),
                             );
                           },

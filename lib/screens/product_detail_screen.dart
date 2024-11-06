@@ -62,10 +62,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   children: [
                     Text(
                       'Product Details:',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(fontFamily: 'poppins'),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(fontFamily: 'poppins'),
                     ),
                     IconButton(
                       icon: Icon(
@@ -221,8 +218,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       ),
                 ),
               ),
-              if (widget.product.images != null &&
-                  widget.product.images!.isNotEmpty)
+              if (widget.product.images != null && widget.product.images!.isNotEmpty)
                 SizedBox(
                   height: 100,
                   child: ListView.builder(
@@ -239,18 +235,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             width: 100,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(),
+                              child: CircularProgressIndicator.adaptive(),
                             ),
-                            errorWidget: (context, url, error) =>
-                                const Icon(Icons.error),
+                            errorWidget: (context, url, error) => const Icon(Icons.error),
                           ),
                         ),
                       );
                     },
                   ),
                 ),
-              if (widget.product.images == null ||
-                  widget.product.images!.isEmpty)
+              if (widget.product.images == null || widget.product.images!.isEmpty)
                 Text(
                   'No images available',
                   style: Theme.of(context).textTheme.bodyMedium,

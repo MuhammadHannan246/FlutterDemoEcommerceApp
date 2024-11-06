@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:test/model/categories_data_model.dart';
 import 'package:test/colors/colors.dart';
-import 'package:test/screens/product_listing_screen.dart';
 import 'package:test/service/categories_service.dart';
 import 'package:test/widgets/category_card_widget.dart';
 
@@ -32,7 +31,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-               Container(
+              Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.0),
                   border: Border.all(color: kBlackColor, width: 1.5),
@@ -60,7 +59,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 future: _categories,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator.adaptive());
                   } else if (snapshot.hasError) {
                     return Center(child: Text('Error: ${snapshot.error}'));
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -72,10 +71,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       children: [
                         Text(
                           '${categories.length} results found',
-                          style:
-                              Theme.of(context).textTheme.bodySmall!.copyWith(
-                                    color: kGreyColor,
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                                color: kGreyColor,
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -84,33 +82,14 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: categories.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 16.0,
                             childAspectRatio: 2 / 2,
                           ),
                           itemBuilder: (context, index) {
                             final category = categories[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ProductListingScreen(
-                                      categoryName:
-                                          category.name ?? 'Unknown Category',
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: CategoryCardWidget(
-                                imageUrl: category.url ??
-                                    'assets/images/default_product.png',
-                                categoryName:
-                                    category.name ?? 'Unknown Category',
-                              ),
-                            );
+                            return CategoryCardWidget(category: category);
                           },
                         ),
                       ],
