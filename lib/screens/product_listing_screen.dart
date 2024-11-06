@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/screens/product_detail_screen.dart';
 import 'package:test/service/product_listing_service.dart';
-import 'package:test/Model/product_data_model.dart';
+import 'package:test/model/product_data_model.dart';
 import 'package:test/widgets/product_card_widget.dart';
 
 
@@ -17,6 +17,8 @@ class ProductListingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+
         title: Text(categoryName),
       ),
       body: SingleChildScrollView(
