@@ -37,6 +37,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   border: Border.all(color: kBlackColor, width: 1.5),
                 ),
                 child: ListTile(
+                  dense: true,
                   leading: const Icon(Icons.search_sharp),
                   title: TextField(
                     decoration: InputDecoration(
