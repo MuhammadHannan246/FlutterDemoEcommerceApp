@@ -14,7 +14,6 @@ class FavouriteProductsScreen extends StatefulWidget {
 }
 
 class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
-  bool isFavorite = true;
   final ProductService _productService = ProductService();
   Future<ProductDataModel?>? _productData;
 
@@ -78,20 +77,18 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 16),
-                        ...products.map((product) {
-                          return FavouriteProductWidget(
-                            imageUrl: product?.thumbnail ?? 'assets/images/default_product.png',
-                            title: product?.title ?? 'Unknown Product',
-                            price: product?.price ?? 0.0,
-                            rating: product?.rating ?? 0.0,
-                            isFavorite: isFavorite,
-                            onFavoriteToggle: () {
-                              setState(() {
-                                isFavorite = !isFavorite;
-                              });
-                            },
-                          );
-                        }),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+
+                            return FavouriteProductWidget(
+                              product: product,
+                            );
+                          },
+                        ),
                       ],
                     );
                   }

@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
+import 'package:test/model/product_data_model.dart';
 
-class FavouriteProductWidget extends StatelessWidget {
-  final String imageUrl;
-  final String title;
-  final double price;
-  final double rating;
-  final bool isFavorite;
-  final VoidCallback onFavoriteToggle;
+class FavouriteProductWidget extends StatefulWidget {
+  final Product? product;
 
   const FavouriteProductWidget({
     super.key,
-    required this.imageUrl,
-    required this.title,
-    required this.price,
-    required this.rating,
-    required this.isFavorite,
-    required this.onFavoriteToggle,
+    required this.product,
   });
+
+  @override
+  State<FavouriteProductWidget> createState() => _FavouriteProductWidgetState();
+}
+
+class _FavouriteProductWidgetState extends State<FavouriteProductWidget> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 0,
+      color: kWhiteColor,
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       shape: RoundedRectangleBorder(
         borderRadius: const BorderRadius.only(
@@ -38,17 +37,28 @@ class FavouriteProductWidget extends StatelessWidget {
             radius: 30.0,
             backgroundColor: kGreyColor,
             child: ClipOval(
-              child: Image.network(
-                imageUrl,
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
-              ),
+              child: widget.product != null
+                  ? widget.product!.thumbnail != null
+                      ? Image.network(
+                          widget.product!.thumbnail!,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Image.asset(
+                              'assets/images/default_product.png',
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/images/default_product.png',
+                          fit: BoxFit.cover,
+                        )
+                  : Container(),
             ),
           ),
           title: Text(
-            title,
+            widget.product?.title ?? 'Unknown Product',
             style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: kBlackColor,
                 ),
@@ -59,7 +69,7 @@ class FavouriteProductWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '\$${price.toStringAsFixed(2)}',
+                '\$${widget.product?.price ?? 0.toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: kBlackColor,
                     ),
@@ -67,7 +77,7 @@ class FavouriteProductWidget extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    rating.toString(),
+                    '${widget.product?.rating ?? 0.0}',
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: kBlackColor,
                         ),
@@ -79,13 +89,14 @@ class FavouriteProductWidget extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? kRedColor : null,
+              color: isFavorite ? kRedColor : kGreyColor,
             ),
-            onPressed: onFavoriteToggle,
+            onPressed: () {
+              setState(() {
+                isFavorite = !isFavorite;
+              });
+            },
           ),
-          onTap: () {
-            // Add navigation or other functionality here
-          },
         ),
       ),
     );

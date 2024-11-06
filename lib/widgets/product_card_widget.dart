@@ -19,6 +19,7 @@ class ProductCardWidget extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: 0,
+        color: kWhiteColor,
         margin: const EdgeInsets.symmetric(vertical: 8.0),
         shape: RoundedRectangleBorder(
           borderRadius: const BorderRadius.only(

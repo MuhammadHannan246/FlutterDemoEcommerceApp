@@ -3,10 +3,12 @@ import 'package:test/colors/colors.dart';
 
 class ThemeStyle {
   static ThemeData darkTheme = ThemeData(
+    scaffoldBackgroundColor: kWhiteColor,
     splashColor: kTransparentColor,
     splashFactory: NoSplash.splashFactory,
     appBarTheme: AppBarTheme(
       foregroundColor: kBlackColor,
+      color: kWhiteColor,
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: ButtonStyle(
