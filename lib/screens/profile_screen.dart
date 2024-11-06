@@ -11,15 +11,15 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
         body: SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
               elevation: 0,
               margin: const EdgeInsets.symmetric(vertical: 8.0),
-              shape: RoundedRectangleBorder(
-                borderRadius: const BorderRadius.all(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
                   Radius.circular(8.0),
                 ),
               ),
@@ -30,7 +30,7 @@ class ProfileScreen extends StatelessWidget {
                   leading: CircleAvatar(
                     radius: 30.0,
                     backgroundColor: kWhiteColor,
-                    child: Icon(Icons.person),
+                    child: const Icon(Icons.person),
                   ),
                   title: Text(
                     'My Name',
@@ -61,7 +61,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
