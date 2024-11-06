@@ -16,6 +16,7 @@ class ProductsScreen extends StatefulWidget {
 class _ProductsScreenState extends State<ProductsScreen> {
   final ProductService _productService = ProductService();
   late Future<ProductDataModel?> _productData;
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -49,9 +50,12 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value.toLowerCase();
+                      });
+                    },
                   ),
-                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 16),
@@ -65,7 +69,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   } else if (!snapshot.hasData || snapshot.data?.products == null || snapshot.data!.products!.isEmpty) {
                     return const Center(child: Text('No products found'));
                   } else {
-                    final products = snapshot.data!.products!;
+                    final products = snapshot.data!.products!.where((product) => product!.title!.toLowerCase().contains(_searchQuery)).toList();
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

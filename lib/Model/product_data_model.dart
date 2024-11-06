@@ -1,10 +1,8 @@
 import 'dart:convert';
 
-ProductDataModel? productDataModelFromJson(String str) =>
-    ProductDataModel.fromJson(json.decode(str));
+ProductDataModel? productDataModelFromJson(String str) => ProductDataModel.fromJson(json.decode(str));
 
-String productDataModelToJson(ProductDataModel? data) =>
-    json.encode(data?.toJson());
+String productDataModelToJson(ProductDataModel? data) => json.encode(data?.toJson());
 
 class ProductDataModel {
   final List<Product?>? products;
@@ -32,21 +30,15 @@ class ProductDataModel {
         limit: limit ?? this.limit,
       );
 
-  factory ProductDataModel.fromJson(Map<String, dynamic> json) =>
-      ProductDataModel(
-        products: json["products"] == null
-            ? null
-            : List<Product?>.from(
-                json["products"].map((x) => Product.fromJson(x))),
+  factory ProductDataModel.fromJson(Map<String, dynamic> json) => ProductDataModel(
+        products: json["products"] == null ? null : List<Product?>.from(json["products"].map((x) => Product.fromJson(x))),
         total: json["total"],
         skip: json["skip"],
         limit: json["limit"],
       );
 
   Map<String, dynamic> toJson() => {
-        "products": products == null
-            ? null
-            : List<dynamic>.from(products!.map((x) => x?.toJson())),
+        "products": products == null ? null : List<dynamic>.from(products!.map((x) => x?.toJson())),
         "total": total,
         "skip": skip,
         "limit": limit,
@@ -160,33 +152,19 @@ class Product {
         discountPercentage: json["discountPercentage"]?.toDouble(),
         rating: json["rating"]?.toDouble(),
         stock: json["stock"],
-        tags: json["tags"] == null
-            ? null
-            : List<String>.from(json["tags"].map((x) => x)),
+        tags: json["tags"] == null ? null : List<String>.from(json["tags"].map((x) => x)),
         brand: json["brand"],
         sku: json["sku"],
         weight: json["weight"],
-        dimensions: json["dimensions"] == null
-            ? null
-            : Dimensions.fromJson(json["dimensions"]),
+        dimensions: json["dimensions"] == null ? null : Dimensions.fromJson(json["dimensions"]),
         warrantyInformation: json["warrantyInformation"],
-        shippingInformation: json["shippingInformation"] == null
-            ? null
-            : shippingInformationValues.map[json["shippingInformation"]],
-        availabilityStatus: json["availabilityStatus"] == null
-            ? null
-            : availabilityStatusValues.map[json["availabilityStatus"]],
-        reviews: json["reviews"] == null
-            ? null
-            : List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
-        returnPolicy: json["returnPolicy"] == null
-            ? null
-            : returnPolicyValues.map[json["returnPolicy"]],
+        shippingInformation: json["shippingInformation"] == null ? null : shippingInformationValues.map[json["shippingInformation"]],
+        availabilityStatus: json["availabilityStatus"] == null ? null : availabilityStatusValues.map[json["availabilityStatus"]],
+        reviews: json["reviews"] == null ? null : List<Review>.from(json["reviews"].map((x) => Review.fromJson(x))),
+        returnPolicy: json["returnPolicy"] == null ? null : returnPolicyValues.map[json["returnPolicy"]],
         minimumOrderQuantity: json["minimumOrderQuantity"],
         meta: json["meta"] == null ? null : Meta.fromJson(json["meta"]),
-        images: json["images"] == null
-            ? null
-            : List<String>.from(json["images"].map((x) => x)),
+        images: json["images"] == null ? null : List<String>.from(json["images"].map((x) => x)),
         thumbnail: json["thumbnail"],
       );
 
@@ -205,27 +183,22 @@ class Product {
         "weight": weight,
         "dimensions": dimensions?.toJson(),
         "warrantyInformation": warrantyInformation,
-        "shippingInformation": shippingInformation == null
-            ? null
-            : shippingInformationValues.reverse[shippingInformation],
-        "availabilityStatus": availabilityStatus == null
-            ? null
-            : availabilityStatusValues.reverse[availabilityStatus],
-        "reviews": reviews == null
-            ? null
-            : List<dynamic>.from(reviews!.map((x) => x.toJson())),
-        "returnPolicy": returnPolicy == null
-            ? null
-            : returnPolicyValues.reverse[returnPolicy],
+        "shippingInformation": shippingInformation == null ? null : shippingInformationValues.reverse[shippingInformation],
+        "availabilityStatus": availabilityStatus == null ? null : availabilityStatusValues.reverse[availabilityStatus],
+        "reviews": reviews == null ? null : List<dynamic>.from(reviews!.map((x) => x.toJson())),
+        "returnPolicy": returnPolicy == null ? null : returnPolicyValues.reverse[returnPolicy],
         "minimumOrderQuantity": minimumOrderQuantity,
         "meta": meta?.toJson(),
-        "images":
-            images == null ? null : List<dynamic>.from(images!.map((x) => x)),
+        "images": images == null ? null : List<dynamic>.from(images!.map((x) => x)),
         "thumbnail": thumbnail,
       };
 }
 
-enum AvailabilityStatus { inStock, lowStock, outOfStock }
+enum AvailabilityStatus {
+  inStock,
+  lowStock,
+  outOfStock
+}
 
 final availabilityStatusValues = EnumValues({
   "In Stock": AvailabilityStatus.inStock,
@@ -295,12 +268,8 @@ class Meta {
       );
 
   factory Meta.fromJson(Map<String, dynamic> json) => Meta(
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
         barcode: json["barcode"],
         qrCode: json["qrCode"],
       );
@@ -360,7 +329,11 @@ class Review {
       };
 }
 
-enum ShippingInformation { express, freeShipping, standard }
+enum ShippingInformation {
+  express,
+  freeShipping,
+  standard
+}
 
 final shippingInformationValues = EnumValues({
   "express": ShippingInformation.express,

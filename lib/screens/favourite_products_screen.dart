@@ -16,6 +16,7 @@ class FavouriteProductsScreen extends StatefulWidget {
 class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
   final ProductService _productService = ProductService();
   Future<ProductDataModel?>? _productData;
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -49,9 +50,12 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value.toLowerCase();
+                      });
+                    },
                   ),
-                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 16),
@@ -65,7 +69,9 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                   } else if (!snapshot.hasData || snapshot.data?.products == null || snapshot.data!.products!.isEmpty) {
                     return const Center(child: Text('No products found'));
                   } else {
-                    final products = snapshot.data!.products!;
+                    // Filter products based on search query
+                    final products = snapshot.data!.products!.where((product) => product!.title!.toLowerCase().contains(_searchQuery)).toList();
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -84,10 +90,7 @@ class _FavouriteProductsScreenState extends State<FavouriteProductsScreen> {
                           itemCount: products.length,
                           itemBuilder: (context, index) {
                             final product = products[index];
-
-                            return FavouriteProductWidget(
-                              product: product,
-                            );
+                            return FavouriteProductWidget(product: product);
                           },
                         ),
                       ],

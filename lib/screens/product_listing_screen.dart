@@ -6,11 +6,18 @@ import 'package:test/model/product_data_model.dart';
 import 'package:test/service/product_service.dart';
 import 'package:test/widgets/product_card_widget.dart';
 
-class ProductListingScreen extends StatelessWidget {
+class ProductListingScreen extends StatefulWidget {
   static const String routeName = '/product-listing-screen';
   final ProductService _productService = ProductService();
 
   ProductListingScreen({super.key});
+
+  @override
+  State<ProductListingScreen> createState() => _ProductListingScreenState();
+}
+
+class _ProductListingScreenState extends State<ProductListingScreen> {
+  String _searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +51,17 @@ class ProductListingScreen extends StatelessWidget {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value.toLowerCase();
+                      });
+                    },
                   ),
-                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 16),
               FutureBuilder<ProductDataModel?>(
-                future: _productService.fetchProductsByCategory(category.name ?? 'Unknown Category'),
+                future: widget._productService.fetchProductsByCategory(category.name ?? 'Unknown Category'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator.adaptive());
@@ -61,7 +71,8 @@ class ProductListingScreen extends StatelessWidget {
                     return const Center(child: Text('No products found'));
                   }
 
-                  final products = snapshot.data!.products!;
+                  final products = snapshot.data!.products!.where((product) => product!.title!.toLowerCase().contains(_searchQuery)).toList();
+
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

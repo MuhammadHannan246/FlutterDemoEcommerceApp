@@ -15,6 +15,7 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   late Future<List<CategoryDataModel>> _categories;
   final CategoryService _categoryService = CategoryService();
+  String _searchQuery = '';
 
   @override
   void initState() {
@@ -48,9 +49,12 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       border: InputBorder.none,
                     ),
                     style: Theme.of(context).textTheme.bodySmall,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      setState(() {
+                        _searchQuery = value.toLowerCase();
+                      });
+                    },
                   ),
-                  onTap: () {},
                 ),
               ),
               const SizedBox(height: 16),
@@ -64,7 +68,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                     return const Center(child: Text('No categories found'));
                   } else {
-                    final categories = snapshot.data!;
+                    final categories = snapshot.data!.where((category) => category.name!.toLowerCase().contains(_searchQuery)).toList();
+
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
