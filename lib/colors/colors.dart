@@ -53,3 +53,4 @@ Color kGreenColor = Colors.green;
 Color kCyanColor = Colors.cyan;
 Color kBlueColor = Colors.blue;
 Color kRedColor = Colors.red;
+Color kAmberColor = Colors.amber;

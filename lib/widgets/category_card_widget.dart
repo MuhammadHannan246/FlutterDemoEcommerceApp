@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:test/colors/colors.dart';
 import 'package:test/model/categories_data_model.dart';
 import 'package:test/screens/product_listing_screen.dart';
 
@@ -48,7 +49,7 @@ class CategoryCardWidget extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.black.withOpacity(0.3),
+                color: kBlackColor.withOpacity(0.3),
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
@@ -59,7 +60,7 @@ class CategoryCardWidget extends StatelessWidget {
                 child: Text(
                   category.name ?? 'Unknown Category',
                   style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
+                        color: kWhiteColor,
                         fontFamily: 'relative',
                       ),
                   maxLines: 1,

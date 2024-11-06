@@ -31,8 +31,7 @@ class ThemeStyle {
       },
     ),
     iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(
-          foregroundColor: WidgetStateProperty.all(kPrimarySwatchColor)),
+      style: ButtonStyle(foregroundColor: WidgetStateProperty.all(kPrimarySwatchColor)),
     ),
     menuButtonTheme: MenuButtonThemeData(
       style: ButtonStyle(

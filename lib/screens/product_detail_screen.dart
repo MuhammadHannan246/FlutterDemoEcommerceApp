@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:test/colors/colors.dart';
 import 'package:test/model/product_data_model.dart';
 import 'package:test/constants/constants.dart';
 
@@ -67,7 +68,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     IconButton(
                       icon: Icon(
                         isWishlisted ? Icons.favorite : Icons.favorite_border,
-                        color: isWishlisted ? Colors.red : Colors.grey,
+                        color: isWishlisted ? kRedColor : kGreyColor,
                       ),
                       onPressed: toggleWishlist,
                     ),
@@ -164,9 +165,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     const SizedBox(width: 4),
                     RatingBarIndicator(
                       rating: widget.product.rating!,
-                      itemBuilder: (context, index) => const Icon(
+                      itemBuilder: (context, index) => Icon(
                         Icons.star,
-                        color: Colors.amber,
+                        color: kAmberColor,
                       ),
                       itemCount: 5,
                       itemSize: 16.0,

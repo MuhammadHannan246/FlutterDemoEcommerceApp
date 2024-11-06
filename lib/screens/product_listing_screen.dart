@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:test/colors/colors.dart';
 import 'package:test/model/categories_data_model.dart';
 import 'package:test/screens/product_detail_screen.dart';
-import 'package:test/service/product_listing_service.dart';
 import 'package:test/model/product_data_model.dart';
+import 'package:test/service/product_service.dart';
 import 'package:test/widgets/product_card_widget.dart';
 
 class ProductListingScreen extends StatelessWidget {
   static const String routeName = '/product-listing-screen';
-  final ProductListingService _productListingService = ProductListingService();
+  final ProductService _productService = ProductService();
 
   ProductListingScreen({super.key});
 
@@ -52,7 +52,7 @@ class ProductListingScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               FutureBuilder<ProductDataModel?>(
-                future: _productListingService.fetchProductsByCategory(category.name ?? 'Unknown Category'),
+                future: _productService.fetchProductsByCategory(category.name ?? 'Unknown Category'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator.adaptive());

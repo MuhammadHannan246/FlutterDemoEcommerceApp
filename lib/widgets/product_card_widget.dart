@@ -60,8 +60,7 @@ class ProductCardWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -99,9 +98,9 @@ class ProductCardWidget extends StatelessWidget {
                         const SizedBox(width: 4),
                         RatingBarIndicator(
                           rating: productRating,
-                          itemBuilder: (context, index) => const Icon(
+                          itemBuilder: (context, index) => Icon(
                             Icons.star,
-                            color: Colors.amber,
+                            color: kAmberColor,
                           ),
                           itemCount: 5,
                           itemSize: 16.0,

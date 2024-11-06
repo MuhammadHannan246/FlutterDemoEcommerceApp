@@ -59,7 +59,7 @@ class FavouriteProductWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                '\$${price.toStringAsFixed(2)}', // Format price to two decimal places
+                '\$${price.toStringAsFixed(2)}',
                 style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: kBlackColor,
                     ),
@@ -79,7 +79,7 @@ class FavouriteProductWidget extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(
               isFavorite ? Icons.favorite : Icons.favorite_border,
-              color: isFavorite ? Colors.red : null,
+              color: isFavorite ? kRedColor : null,
             ),
             onPressed: onFavoriteToggle,
           ),
