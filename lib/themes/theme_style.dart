@@ -12,7 +12,6 @@ class ThemeStyle {
     ),
     filledButtonTheme: FilledButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kSecondarySwatchColor),
         foregroundColor: WidgetStateProperty.all(kWhiteColor),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
@@ -27,27 +26,8 @@ class ThemeStyle {
         ),
       ),
     ),
-    actionIconTheme: ActionIconThemeData(
-      endDrawerButtonIconBuilder: (context) {
-        return Icon(Icons.menu, color: kGrey900Color);
-      },
-    ),
-    iconButtonTheme: IconButtonThemeData(
-      style: ButtonStyle(foregroundColor: WidgetStateProperty.all(kPrimarySwatchColor)),
-    ),
-    menuButtonTheme: MenuButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kPrimarySwatchColor),
-      ),
-    ),
-    textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kPrimarySwatchColor),
-      ),
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kPrimarySwatchColor),
         shape: WidgetStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(40),
@@ -72,42 +52,8 @@ class ThemeStyle {
         ),
       ),
     ),
-    segmentedButtonTheme: SegmentedButtonThemeData(
-      style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kPrimarySwatchColor),
-      ),
-    ),
     datePickerTheme: DatePickerThemeData(
       backgroundColor: kWhiteColor,
-      todayBackgroundColor: WidgetStatePropertyAll(kPrimarySwatchColor),
-      confirmButtonStyle: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all(kPrimarySwatchColor),
-      ),
-    ),
-    radioTheme: RadioThemeData(
-      fillColor: WidgetStateColor.resolveWith(
-        (Set<WidgetState> states) {
-          if (states.contains(WidgetState.selected)) {
-            return kPrimarySwatchColor;
-          }
-          return kWhiteColor;
-        },
-      ),
-    ),
-    checkboxTheme: CheckboxThemeData(
-      fillColor: WidgetStateColor.resolveWith(
-        (Set<WidgetState> states) {
-          if (states.contains(WidgetState.selected)) {
-            return kPrimarySwatchColor;
-          }
-          return kGrey900Color;
-        },
-      ),
-      side: WidgetStateBorderSide.resolveWith(
-        (Set<WidgetState> states) {
-          return BorderSide(color: kPrimarySwatchColor);
-        },
-      ),
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       type: BottomNavigationBarType.fixed,
