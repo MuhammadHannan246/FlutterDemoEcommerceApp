@@ -118,7 +118,7 @@ class ProductCardWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    product.category ?? 'Unknown Category',
+                    'In ${product.category ?? 'Unknown Category'}',
                     style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: kBlackColor,
                         ),
