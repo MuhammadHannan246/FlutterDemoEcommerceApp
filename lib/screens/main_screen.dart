@@ -79,6 +79,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0.0,
         title: Center(
           child: _buildAppBarTitle(),
         ),
